@@ -1,0 +1,17 @@
+version: '3'
+services:
+  certbot:
+    image: certbot/certbot:arm64v8-latest
+    ports:
+      - 80:80
+    volumes:
+      - ${CERTBOT_STORAGE_PATH}/certbot/conf:/etc/letsencrypt
+      - ${CERTBOT_STORAGE_PATH}/certbot/www:/var/www/certbot
+    command:
+      - certonly
+      - --domains=cockpit.${DOMAIN}
+      - --email=${EMAIL}
+      - --standalone
+      - --agree-tos
+      - --force-renewal
+      - --no-eff-email
