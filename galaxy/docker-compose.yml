@@ -10,7 +10,7 @@ services:
       - ${CERTBOT_STORAGE_PATH}/certbot/www:/var/www/certbot
       # logs
   certbot:
-    image: certbot/certbot:arm64v8-latest
+    image: certbot/certbot:v1.9.0
     volumes:
       - ${CERTBOT_STORAGE_PATH}/certbot/conf:/etc/letsencrypt
       - ${CERTBOT_STORAGE_PATH}/certbot/www:/var/www/certbot

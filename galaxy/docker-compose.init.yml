@@ -1,17 +1,20 @@
 version: '3'
 services:
   certbot:
-    image: certbot/certbot:arm64v8-latest
-    ports:
-      - 80:80
+    image: certbot/certbot:v1.9.0
     volumes:
       - ${CERTBOT_STORAGE_PATH}/certbot/conf:/etc/letsencrypt
       - ${CERTBOT_STORAGE_PATH}/certbot/www:/var/www/certbot
     command:
       - certonly
-      - --domains=cockpit.${DOMAIN}
+      - --preferred-challenges=dns
+      - --rsa-key-size=4096
+      - --cert-name=${DOMAIN}
+      - --domains=${DOMAIN}
+      - --domains=*.${DOMAIN}
       - --email=${EMAIL}
-      - --standalone
-      - --agree-tos
+      - --manual
       - --force-renewal
+      - --agree-tos
       - --no-eff-email
+      - --manual-public-ip-logging-ok

@@ -32,8 +32,8 @@ http {
       root /var/www/certbot;
     }
 
-    ssl_certificate /etc/letsencrypt/live/cockpit.${DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/cockpit.${DOMAIN}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
 
     # SSL stuffs
     # include /etc/letsencrypt/options-ssl-nginx.conf;
