@@ -3,4 +3,3 @@ sudo usermod -aG libvirt rosen
 sudo usermod -aG libvirt-qemu rosen
 sudo virsh net-start default
 sudo virsh net-autostart default
-exit
