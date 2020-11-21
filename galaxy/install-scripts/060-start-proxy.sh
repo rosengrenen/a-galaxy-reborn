@@ -1,3 +1,3 @@
 cd /galaxy/a-galaxy-reborn/galaxy
-docker-compose -f docker-compose.init.yml run certbot
-docker-compose up -d
+sudo docker-compose -f docker-compose.init.yml run certbot
+sudo docker-compose up -d
