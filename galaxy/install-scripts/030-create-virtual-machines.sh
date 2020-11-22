@@ -8,7 +8,8 @@ sudo virt-install \
   --cdrom /tmp/ubuntu-20.04-server-amd64.iso \
   --disk size=10 \
   --graphics vnc,listen=0.0.0.0 \
-  --noautoconsole
+  --noautoconsole \
+  --autostart
 
 sudo virt-install \
   --virt-type kvm \
@@ -17,7 +18,8 @@ sudo virt-install \
   --cdrom /tmp/ubuntu-20.04-server-amd64.iso \
   --disk size=10 \
   --graphics vnc,listen=0.0.0.0 \
-  --noautoconsole
+  --noautoconsole \
+  --autostart
 
 sudo virt-install \
   --virt-type kvm \
@@ -26,7 +28,8 @@ sudo virt-install \
   --cdrom /tmp/ubuntu-20.04-server-amd64.iso \
   --disk size=10 \
   --graphics vnc,listen=0.0.0.0 \
-  --noautoconsole
+  --noautoconsole \
+  --autostart
 
 sudo virt-install \
   --virt-type kvm \
@@ -35,4 +38,5 @@ sudo virt-install \
   --cdrom /tmp/ubuntu-20.04-server-amd64.iso \
   --disk size=10 \
   --graphics vnc,listen=0.0.0.0 \
-  --noautoconsole
+  --noautoconsole \
+  --autostart
