@@ -3,17 +3,17 @@ if [ -z $domain ]; then
   domain="chalmers.it"
 fi
 
-sudo certbot certonly
-  --preferred-challenges=dns
-  --rsa-key-size=4096
-  --cert-name=$domain
-  --domains=cockit.$domain
-  --domains=*.h.$domain
-  --manual
-  --force-renewal
-  --agree-tos
-  --no-eff-email
+sudo certbot certonly \
+  --preferred-challenges=dns \
+  --rsa-key-size=4096 \
+  --cert-name=$domain \
+  --domains=cockpit.$domain \
+  --domains=*.h.$domain \
+  --manual \
+  --agree-tos \
+  --no-eff-email \
   --manual-public-ip-logging-ok
 
-DOMAIN=$domain sudo envsubst '${DOMAIN}' < /galaxy/a-galaxy-reborn/galaxy/conf-files/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+export DOMAIN=$domain
+envsubst '${DOMAIN}' < /galaxy/a-galaxy-reborn/galaxy/conf-files/nginx/nginx.conf.template | sudo dd of=/etc/nginx/nginx.conf status=none
 sudo systemctl restart nginx
