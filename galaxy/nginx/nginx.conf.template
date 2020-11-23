@@ -70,7 +70,7 @@ http {
     # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     location / {
-      proxy_pass http://192.168.122.51:9000;
+      proxy_pass http://portainer:9000;
       proxy_set_header Host $host;
       proxy_set_header X-Forwarded-Proto $scheme;
 
