@@ -17,10 +17,10 @@ sudo docker run \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume "$TRAEFIK_STORAGE_PATH/logs:/var/log" \
   --label "traefik.enable=true" \
-  --label "traefik.http.routers.forward-to-http.rule=hostregexp(`{host:.+}`)" \
+  --label "traefik.http.routers.forward-to-http.rule=hostregexp(\`{host:.+}\`)" \
   --label "traefik.http.routers.forward-to-http.entrypoints=http" \
   --label "traefik.http.routers.forward-to-http.service=forward-to-http" \
-  --label "traefik.http.routers.api.rule=Host(`traefik.$DOMAIN`)" \
+  --label "traefik.http.routers.api.rule=Host(\`traefik.$DOMAIN\`)" \
   --label "traefik.http.routers.api.service=api@internal" \
   --label "traefik.http.routers.api.entryPoints=http" \
   --label "traefik.http.services.forward-to-http.loadbalancer.server.url=http" \
