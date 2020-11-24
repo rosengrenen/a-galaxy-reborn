@@ -1,3 +1,5 @@
+load_module /usr/lib/nginx/modules/ngx_stream_module.so;
+
 worker_processes auto;
 
 error_log /var/log/nginx/error.log warn;
@@ -28,10 +30,6 @@ http {
 
     server_name cockpit.${DOMAIN};
 
-    location /.well-known/acme-challenge/ {
-      root /var/www/certbot;
-    }
-
     ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
 
@@ -57,10 +55,6 @@ http {
 
     server_name portainer.${DOMAIN};
 
-    location /.well-known/acme-challenge/ {
-      root /var/www/certbot;
-    }
-
     ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
 
@@ -74,12 +68,131 @@ http {
       proxy_set_header Host $host;
       proxy_set_header X-Forwarded-Proto $scheme;
 
-      # proxy_http_version 1.1;
-      # proxy_buffering off;
-      # proxy_set_header Upgrade $http_upgrade;
-      # proxy_set_header Connection "upgrade";
+      proxy_http_version 1.1;
+      proxy_buffering off;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
     }
   }
-}
 
-# stream to vms
+  server {
+    listen 443 ssl http2;
+
+    server_name .${DOMAIN};
+
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
+
+    # SSL stuffs
+    # include /etc/letsencrypt/options-ssl-nginx.conf;
+    # dh param better stuffs, we need to generate this
+    # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+      proxy_pass http://prod;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+
+      proxy_http_version 1.1;
+      proxy_buffering off;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
+  }
+
+  server {
+    listen 443 ssl http2;
+
+    server_name .dev.${DOMAIN};
+
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
+
+    # SSL stuffs
+    # include /etc/letsencrypt/options-ssl-nginx.conf;
+    # dh param better stuffs, we need to generate this
+    # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+      proxy_pass http://dev;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+
+      proxy_http_version 1.1;
+      proxy_buffering off;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  # server {
+  #   listen 443 ssl http2;
+
+  #   server_name .h.${DOMAIN};
+
+  #   ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+  #   ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
+
+  #   # SSL stuffs
+  #   # include /etc/letsencrypt/options-ssl-nginx.conf;
+  #   # dh param better stuffs, we need to generate this
+  #   # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+  #   location / {
+  #     proxy_pass http://http;
+  #     proxy_set_header Host $host;
+  #     proxy_set_header X-Forwarded-Proto $scheme;
+
+  #     proxy_http_version 1.1;
+  #     proxy_buffering off;
+  #     proxy_set_header Upgrade $http_upgrade;
+  #     proxy_set_header Connection "upgrade";
+  #   }
+  # }
+}

@@ -7,7 +7,9 @@ sudo certbot certonly \
   --preferred-challenges=dns \
   --rsa-key-size=4096 \
   --cert-name=$domain \
-  --domains=cockpit.$domain \
+  --domains=$domain \
+  --domains=*.$domain \
+  --domains=*.dev.$domain \
   --domains=*.h.$domain \
   --manual \
   --agree-tos \

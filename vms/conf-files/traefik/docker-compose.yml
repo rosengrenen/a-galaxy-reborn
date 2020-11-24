@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  traefik:
+    image: traefik:v2.3.3
+    networks:
+      - traefik
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${TRAEFIK_STORAGE_PATH}/logs:/var/log
+    command:
+      - --api.insecure=false
+      - --api.dashboard=true
+      - --log.level=INFO
+      - --log.filepath=/var/log/traefik.log
+      - --log.format=json
+      - --accesslog=true
+      - --accesslog.filepath=/var/log/access.log
+      - --accesslog.bufferingsize=100
+      - --accesslog.format=json
+      - --accesslog.fields.defaultmode=keep
+      - --accesslog.fields.headers.defaultmode=keep
+      - --accesslog.fields.headers.names.Authorization=drop
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --providers.docker.network=traefik
+      - --entrypoints.http.address=:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.forward-to-http.rule=hostregexp(`{host:.+}`)
+      - traefik.http.routers.forward-to-http.entrypoints=http
+      - traefik.http.routers.forward-to-http.service=forward-to-http
+      - traefik.http.routers.api.rule=Host(`traefik.${DOMAIN}`)
+      - traefik.http.routers.api.service=api@internal
+      - traefik.http.routers.api.entryPoints=http
+      - traefik.http.services.forward-to-http.loadbalancer.server.url=http
+      # - traefik.http.services.api.loadbalancer.server.port=8080
+
+networks:
+  traefik:
+    external: true
