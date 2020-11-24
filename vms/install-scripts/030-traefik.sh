@@ -14,6 +14,7 @@ sudo docker run \
   --network traefik \
   --publish 80:80 \
   --restart unless-stopped \
+  --detach \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume "$TRAEFIK_STORAGE_PATH/logs:/var/log" \
   --label "traefik.enable=true" \
@@ -24,6 +25,7 @@ sudo docker run \
   --label "traefik.http.routers.api.service=api@internal" \
   --label "traefik.http.routers.api.entryPoints=http" \
   --label "traefik.http.services.forward-to-http.loadbalancer.server.url=http" \
+  --label "traefik.http.services.forward-to-http.loadbalancer.server.port=80" \
   traefik:v2.3.3 \
   --api.insecure=false \
   --api.dashboard=true \

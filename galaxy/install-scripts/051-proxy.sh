@@ -10,7 +10,6 @@ sudo certbot certonly \
   --domains=$domain \
   --domains=*.$domain \
   --domains=*.dev.$domain \
-  --domains=*.h.$domain \
   --manual \
   --agree-tos \
   --no-eff-email \
