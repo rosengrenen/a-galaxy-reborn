@@ -6,6 +6,8 @@ fi
 export DOMAIN=$domain
 export TRAEFIK_STORAGE_PATH=/data/traefik
 
+sudo docker create network traefik
+
 sudo docker stop traefik
 sudo docker rm traefik
 sudo docker run \
