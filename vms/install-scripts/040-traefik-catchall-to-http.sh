@@ -1,3 +1,5 @@
+# Creates a catch-all traefik rule that forwards traffic to the http vm using nginx
+
 sudo docker stop nginx-traefik-catchall-to-http
 sudo docker rm nginx-traefik-catchall-to-http
 sudo docker run \

@@ -1,3 +1,5 @@
+# Install docker
+# See: https://docs.docker.com/engine/install/ubuntu/
 sudo apt-get install -y \
   apt-transport-https \
   ca-certificates \

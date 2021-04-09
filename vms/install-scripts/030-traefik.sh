@@ -3,7 +3,19 @@ if [ -z $domain ]; then
   domain="chalmers.it"
 fi
 
+# Creates a traefik docker container. Traefik is a proxy server
+# that is configured using labels, so there is no central configuration
+# for routes
+#
+# The current configuration does not any authentication for the dashboard,
+# it should probably be turned off, or authentication could be implemented
+# using ForwardAuth (https://doc.traefik.io/traefik/middlewares/forwardauth/)
+# by creating a custom service that connects to gamma (using authorities) or ldap
+#
+# Docs: https://doc.traefik.io/traefik/
+
 export DOMAIN=$domain
+# TODO: create a docker volume instead
 export TRAEFIK_STORAGE_PATH=/data/traefik
 
 sudo docker network create traefik
@@ -22,7 +34,7 @@ sudo docker run \
   --label "traefik.http.routers.api.rule=Host(\`traefik.$DOMAIN\`)" \
   --label "traefik.http.routers.api.service=api@internal" \
   --label "traefik.http.routers.api.entryPoints=http" \
-  traefik:v2.3.3 \
+  traefik:v2.4.8 \
   --api.insecure=false \
   --api.dashboard=true \
   --log.level=INFO \

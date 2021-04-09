@@ -1,6 +1,9 @@
+# Get ubuntu server image
 wget https://releases.ubuntu.com/20.04.1/ubuntu-20.04.1-live-server-amd64.iso \
   -O /tmp/ubuntu-20.04-server-amd64.iso
 
+# Install VMS
+# Memory, cpus and disk values need to be adjusted
 sudo virt-install \
   --virt-type kvm \
   --name portainer \
@@ -13,7 +16,7 @@ sudo virt-install \
 
 sudo virt-install \
   --virt-type kvm \
-  --name prod \
+  --name docker-prod \
   --memory 2048 --vcpus=2 \
   --cdrom /tmp/ubuntu-20.04-server-amd64.iso \
   --disk size=10 \
@@ -23,7 +26,7 @@ sudo virt-install \
 
 sudo virt-install \
   --virt-type kvm \
-  --name dev \
+  --name docker-dev \
   --memory 1024 --vcpus=1 \
   --cdrom /tmp/ubuntu-20.04-server-amd64.iso \
   --disk size=10 \
