@@ -159,3 +159,72 @@ sudo usermod -aG docker digit
 ### ssh trust
 
 Add hosts pub key to .ssh/authorized_keys
+
+## host
+
+### Spin up k8s cluster
+
+#### Install rke
+
+Get latest executable from [Github](https://github.com/rancher/rke/#latest-release) and put in `/opt/rke/rke`, make executable (`chmod +x`).
+
+#### Install kubectl
+
+Go to `/opt/kubectl` and run `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"` (from [here](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)).
+
+> Make sure it is executable
+
+#### Install helm
+
+Go to `/tmp`.
+
+Download tar from `https://github.com/helm/helm/releases`.
+
+Extract with `tar -zxvf`.
+
+Move executable from extracted folder to `/opt/helm/helm`.
+
+> Again, make sure it is executable
+
+#### Configure rke
+
+Make your way over to `~/.rke`, creating the directory if needed.
+
+Run `/opt/rke/rke config` and fill in appropriate values, it's not difficult. If you need to get the ip address of the vm just run `ip a` on it, it should be `192.168.122.*`.
+
+Add the following to `~/.rke/cluster.yml` from [here](https://rancher.com/docs/rancher/v2.x/en/installation/install-rancher-on-k8s/chart-options/#external-tls-termination)
+
+```yml
+ingress:
+  provider: "nginx"
+  options:
+    use-forwarded-headers: "true"
+```
+
+Run `/opt/rke/rke up` to launch the cluster. Re-run the command if it fails.
+
+Set env var: `export KUBECONFIG=~/.rke/kube_config_cluster.yml`.
+
+> Running `/opt/kubectl/kubectl get nodes` should return the one node.
+
+### Install Rancher
+
+```sh
+/opt/helm/helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+/opt/kubectl/kubectl create namespace cattle-system
+/opt/helm/helm install rancher rancher-stable/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.chalmers.it \
+  --set tls=external \
+  --set replicas=1
+# Wait for the installation to finish
+/opt/kubectl/kubectl -n cattle-system rollout status deploy/rancher
+```
+
+Now the GUI should be available at `rancher.chalmers.it`.
+
+Create a new project called `longhorn`, where you install the **Longhorn** _app_ with default replicas set to 1.
+
+Create 3 new projects: `digit-secret`, `digit-core` and `digit`.
+
+Setup LDAP authentication.
