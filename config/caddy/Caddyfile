@@ -1,0 +1,22 @@
+{
+  email serverchef.digit@chalmers.it
+  
+  # For prod
+  # acme_dns cloudflare <api_key>
+
+  # For dev
+  # local_certs
+}
+
+chalmers.it,
+*.chalmers.it,
+nollk.it {
+  @http {
+    procotol http
+  }
+
+  redir @http https://{host}{uri} permanent
+  reverse_proxy {
+    to http://kubernetes-1
+  }
+}

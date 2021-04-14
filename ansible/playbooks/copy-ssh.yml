@@ -1,0 +1,9 @@
+- name: copy ssh key
+  hosts: ubuntu
+  remote_user: digit
+
+  tasks:
+    - name: copy
+      authorized_key:
+        key: "{{ lookup('file', '/home/digit/.ssh/id_rsa.pub') }}"
+        user: digit

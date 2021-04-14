@@ -1,0 +1,11 @@
+- name: install qemu-guest-agent
+  hosts: ubuntu
+  remote_user: digit
+  become: yes
+
+  tasks:
+    - name: install
+      apt:
+        name: qemu-guest-agent
+        state: latest
+        update_cache: yes
