@@ -1,7 +1,7 @@
 [ubuntu]
-kubernetes-1
-http
-proxy
+kubernetes-1 ansible_python_interpreter=/usr/bin/python3
+http ansible_python_interpreter=/usr/bin/python3
+proxy ansible_python_interpreter=/usr/bin/python3
 
 [docker]
-kubernetes-1
+kubernetes-1 ansible_python_interpreter=/usr/bin/python3
