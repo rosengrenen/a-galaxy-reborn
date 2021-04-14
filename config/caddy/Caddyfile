@@ -12,7 +12,7 @@ chalmers.it,
 *.chalmers.it,
 nollk.it {
   @http {
-    procotol http
+    protocol http
   }
 
   redir @http https://{host}{uri} permanent
