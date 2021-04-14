@@ -30,6 +30,33 @@ List of virtual machines to probably install:
 - Http server, running nginx or caddy
 - Proxy server, running nginx or caddy, the entry point
 
+### Setup machines
+
+Install pip and ansible
+
+```sh
+sudo apt install python3-pip
+pip3 install ansible
+```
+
+This usually installs it into `~/.local/bin`, so add that to the path with `export PATH=$HOME/.local/bin:$PATH`
+
+Add/remove hosts in `ansible/inventory/hosts` as needed. Then run the following playbooks:
+
+```sh
+# Copy public key to hosts
+ansible-playbook ./ansible/playbooks/copy-ssh.yml  -i ./ansible/inventory/hosts -k
+
+# Upgrade systems
+ansible-playbook ./ansible/playbooks/upgrade.yml  -i ./ansible/inventory/hosts -K
+
+# Install qemu guest agent so that proxmox can get more info about vms
+ansible-playbook ./ansible/playbooks/qemu-guest-agent.yml  -i ./ansible/inventory/hosts -K
+
+# Install docker on machines in the docker hosts groups
+ansible-playbook ./ansible/playbooks/install-docker.yml  -i ./ansible/inventory/hosts -K
+```
+
 ### Spin up k8s cluster
 
 Run `000-rke-reqs.sh` on the host.
