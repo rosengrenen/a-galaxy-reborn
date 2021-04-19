@@ -1,0 +1,5 @@
+version: "3"
+services:inspircd:
+  image: inspircd/inspircd-docker
+  ports:
+    - 6667:6667

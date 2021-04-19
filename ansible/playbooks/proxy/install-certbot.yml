@@ -1,0 +1,12 @@
+- name: install certbot
+  hosts: proxy
+  remote_user: digit
+  become: yes
+
+  tasks:
+    - name: install certbot
+      apt:
+        name:
+          - certbot
+        state: latest
+        update_cache: yes

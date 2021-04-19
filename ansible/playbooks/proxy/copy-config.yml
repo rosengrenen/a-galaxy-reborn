@@ -1,0 +1,21 @@
+- name: copy config
+  hosts: proxy
+  remote_user: digit
+  become: yes
+
+  tasks:
+    - name: copy nginx conf
+      ansible.builtin.copy:
+        src: proxy/config/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: copy cloudflare ini
+      ansible.builtin.copy:
+        src: proxy/config/cloudflare.ini
+        dest: /home/digit/.secrets/certbot/cloudflare.ini
+        owner: digit
+        group: digit
+        mode: "0644"

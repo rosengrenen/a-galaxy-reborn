@@ -1,0 +1,23 @@
+version: "3"
+services:
+  ldap:
+    image: osixia/openldap
+    environment:
+      LDAP_ORGANISATION: digIT
+      LDAP_DOMAIN: chalmers.it
+      LDAP_ADMIN_PASSWORD: <ldap_admin_password>
+      LDAP_TLS: "false"
+    hostname: chalmers.it
+    ports:
+      - 389:389
+    volumes:
+      - /data/ldap/database:/var/lib/ldap
+      - /data/ldap/config:/etc/ldap/slapd.d
+
+  gui:
+    image: osixia/phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - 80:80
