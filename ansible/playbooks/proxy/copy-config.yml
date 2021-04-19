@@ -6,15 +6,21 @@
   tasks:
     - name: copy nginx conf
       ansible.builtin.copy:
-        src: proxy/config/nginx.conf
+        src: ../../../proxy/config/nginx.conf
         dest: /etc/nginx/nginx.conf
         owner: root
         group: root
         mode: "0644"
 
+    - name: ensure that certbot secrets dir exists
+      ansible.builtin.file:
+        path: /home/digit/.secrets/certbot
+        state: directory
+        recurse: yes
+
     - name: copy cloudflare ini
       ansible.builtin.copy:
-        src: proxy/config/cloudflare.ini
+        src: ../../../proxy/config/cloudflare.ini
         dest: /home/digit/.secrets/certbot/cloudflare.ini
         owner: digit
         group: digit

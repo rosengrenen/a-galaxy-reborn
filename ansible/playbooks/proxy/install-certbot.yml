@@ -4,9 +4,17 @@
   become: yes
 
   tasks:
-    - name: install certbot
-      apt:
-        name:
-          - certbot
-        state: latest
-        update_cache: yes
+    - name: install certs
+      ansible.builtin.shell: |
+        sudo certbot certonly \
+          --dns-cloudflare
+          --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini \
+          --rsa-key-size=4096 \
+          --cert-name=chalmers.it \
+          --domains=chalmers.it \
+          --domains=*.chalmers.it \
+          --domains=nollk.it \
+          --nginx \
+          --agree-tos \
+          --no-eff-email \
+          --manual-public-ip-logging-ok
