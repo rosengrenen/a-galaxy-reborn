@@ -1,22 +1,21 @@
-- name: install certs
+- name: install certbot
   hosts: proxy
   remote_user: digit
   become: yes
 
   tasks:
-    - name: install certbot
-      community.general.snap:
-        name: certbot
-        classic: yes
-    - name: symlink certbot to /usr/bin
-      ansible.builtin.file:
-        src: /snap/bin/certbot
-        dest: /usr/bin/certbot
-        owner: root
-        group: root
-        state: link
-    - name: trust certbot with root
-      ansible.builtin.shell: sudo snap set certbot trust-plugin-with-root=ok
-    - name: install certbot cloudflare plugin
-      community.general.snap:
-        name: certbot-dns-cloudflare
+    - name: install certs
+      ansible.builtin.shell: |
+        certbot certonly \
+          --dns-cloudflare
+          --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini \
+          --dns-cloudflare-propagation-seconds 60 \
+          --rsa-key-size=4096 \
+          --cert-name=chalmers.it \
+          --domains=chalmers.it \
+          --domains=*.chalmers.it \
+          --domains=nollk.it \
+          --nginx \
+          --agree-tos \
+          --no-eff-email \
+          --manual-public-ip-logging-ok
