@@ -1,0 +1,22 @@
+version: "3"
+services:
+  bitwarden:
+    image: bitwardenrs/server:1.20.0
+    container_name: bitwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: https://bitwarden.chalmers.it
+      SIGNUPS_ALLOWED: "false"
+      ADMIN_TOKEN: digit
+      WEBSOCKET_ENABLED: "true"
+      SMTP_HOST: smtp_host
+      SMTP_FROM: smtp_from
+      SMTP_PORT: 587
+      SMTP_SSL: true
+      SMTP_USERNAME: smtp_username
+      SMTP_PASSWORD: smtp_password
+    ports:
+      - 80:80
+      - 3012:3012
+    volumes:
+      - bitwarden-data:/data
