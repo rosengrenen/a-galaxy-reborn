@@ -2,7 +2,6 @@ version: "3"
 services:
   bitwarden:
     image: bitwardenrs/server:1.20.0
-    container_name: bitwarden
     restart: unless-stopped
     environment:
       DOMAIN: https://bitwarden.chalmers.it
@@ -17,6 +16,6 @@ services:
       SMTP_PASSWORD: smtp_password
     ports:
       - 80:80
-      - 3012:3012
+      - 3012:3012 # for /notifications/hub
     volumes:
       - bitwarden-data:/data

@@ -24,10 +24,17 @@ http://ldap.chalmers.it {
   reverse_proxy /.well-known/* ldap:80
 }
 
+https://ldap.chalmers.it {
+  reverse_proxy ldap:80
+}
+
 https://proxmox.chalmers.it {
   reverse_proxy {
     to https://192.168.2.245:8006
     header_up X-Real-IP {remote_host}
+    transport http {
+      tls_insecure_skip_verify
+    }
   }
 }
 
