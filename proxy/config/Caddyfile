@@ -1,0 +1,41 @@
+{
+  email serverchef.digit@chalmers.it
+
+  # For prod
+  acme_dns cloudflare <cloudflare_api_token>
+
+  # For dev
+  # local_certs
+}
+
+:80 {
+  @http {
+    protocol http
+  }
+
+  redir @http https://{host}{url} permanent
+}
+
+http://irc.chalmers.it {
+  reverse_proxy /.well-known/* irc:80
+}
+
+http://ldap.chalmers.it {
+  reverse_proxy /.well-known/* ldap:80
+}
+
+https://proxmox.chalmers.it {
+  reverse_proxy {
+    to https://192.168.2.245:8006
+    header_up X-Real-IP {remote_host}
+  }
+}
+
+https://chalmers.it,
+https://*.chalmers.it,
+https://nollk.it {
+  reverse_proxy {
+    to http://kubernetes-1:80
+    header_up X-Real-IP {remote_host}
+  }
+}
