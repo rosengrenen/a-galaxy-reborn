@@ -6,11 +6,14 @@ services:
       LDAP_ORGANISATION: digIT
       LDAP_DOMAIN: chalmers.it
       LDAP_ADMIN_PASSWORD: <ldap_admin_password>
-      LDAP_TLS: "false"
+      LDAP_TLS_CRT_FILENAME: live/ldap.chalmers.it/cert.pem
+      LDAP_TLS_KEY_FILENAME: live/ldap.chalmers.it/privkey.pem
+      LDAP_TLS_CA_CRT_FILENAME: live/ldap.chalmers.it/fullchain.pem
     hostname: chalmers.it
     ports:
-      - 389:389
+      - 636:636
     volumes:
+      - /etc/letsencrypt:/container/service/slapd/assets/certs
       - /data/ldap/database:/var/lib/ldap
       - /data/ldap/config:/etc/ldap/slapd.d
 

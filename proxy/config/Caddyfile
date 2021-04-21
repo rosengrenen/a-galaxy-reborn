@@ -17,15 +17,15 @@
 }
 
 http://irc.chalmers.it {
-  reverse_proxy /.well-known/* irc:80
+  reverse_proxy /.well-known/* http://irc:80
 }
 
-http://ldap.chalmers.it {
-  reverse_proxy /.well-known/* ldap:80
+http://chalmers.it {
+  reverse_proxy /.well-known/* http://ldap:80
 }
 
 https://ldap.chalmers.it {
-  reverse_proxy ldap:80
+  reverse_proxy http://ldap:80
 }
 
 https://proxmox.chalmers.it {
