@@ -1,0 +1,33 @@
+# Entry 1: ou=SUDOers,dc=chalmers,dc=it
+dn: ou=SUDOers,dc=chalmers,dc=it
+objectclass: organizationalUnit
+objectclass: top
+ou: SUDOers
+
+# Entry 2: cn=defaults,ou=SUDOers,dc=chalmers,dc=it
+dn: cn=defaults,ou=SUDOers,dc=chalmers,dc=it
+cn: defaults
+objectclass: sudoRole
+objectclass: top
+sudooption: insults
+sudooption: env_keep+=SSH_AUTH_SOCK
+
+# Entry 3: cn=didit,ou=SUDOers,dc=chalmers,dc=it
+dn: cn=didit,ou=SUDOers,dc=chalmers,dc=it
+cn: didit
+description: Grant didIT sudo-powers
+objectclass: sudoRole
+objectclass: top
+sudocommand: ALL
+sudohost: ALL
+sudouser: %didit
+
+# Entry 4: cn=digit,ou=SUDOers,dc=chalmers,dc=it
+dn: cn=digit,ou=SUDOers,dc=chalmers,dc=it
+cn: digit
+description: Grant digIT sudo-powers
+objectclass: sudoRole
+objectclass: top
+sudocommand: ALL
+sudohost: ALL
+sudouser: %digit

@@ -6,14 +6,17 @@ services:
       LDAP_ORGANISATION: digIT
       LDAP_DOMAIN: chalmers.it
       LDAP_ADMIN_PASSWORD: <ldap_admin_password>
-      LDAP_TLS_CRT_FILENAME: live/chalmers.it/cert.pem
-      LDAP_TLS_KEY_FILENAME: live/chalmers.it/privkey.pem
-      LDAP_TLS_CA_CRT_FILENAME: live/chalmers.it/fullchain.pem
-    hostname: chalmers.it
+      LDAP_TLS_CRT_FILENAME: live/ldap.chalmers.it/cert.pem
+      LDAP_TLS_KEY_FILENAME: live/ldap.chalmers.it/privkey.pem
+      LDAP_TLS_CA_CRT_FILENAME: live/ldap.chalmers.it/fullchain.pem
+      LDAP_TLS_VERIFY_CLIENT: try
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "false"
+    hostname: ldap.chalmers.it
     ports:
       - 636:636
     volumes:
       - /etc/letsencrypt:/container/service/slapd/assets/certs
+      - ./ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom
       - /data/ldap/database:/var/lib/ldap
       - /data/ldap/config:/etc/ldap/slapd.d
 
