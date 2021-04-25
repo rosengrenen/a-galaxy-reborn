@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE template SYSTEM "template.dtd">
+
+<template>
+  <askcontainer>0</askcontainer>
+  <description>New Chalmers IT User Account</description>
+  <icon>it.png</icon>
+  <invalid>0</invalid>
+  <rdn>uid</rdn>
+  <regexp>^ou=people</regexp>
+  <title>Chalmers IT: User Account</title>
+  <visible>1</visible>
+
+  <objectClasses>
+    <objectClass id="organizationalPerson"></objectClass>
+    <objectClass id="posixAccount"></objectClass>
+    <objectClass id="top"></objectClass>
+  </objectClasses>
+
+  <attributes>
+    <attribute id="uid">
+      <display>cid</display>
+      <icon>ldap-uid.png</icon>
+      <hint>chalmers id</hint>
+      <onchange>=autoFill(homeDirectory;/home/chalmersit/%uid%)</onchange>
+    </attribute>
+    <attribute id="cn">
+      <display>First name</display>
+    </attribute>
+    <attribute id="sn">
+      <display>Last name</display>
+    </attribute>
+    <attribute id="userPassword">
+      <display>Password</display>
+      <helper>
+        <display>Encryption</display>
+        <default>ssha</default>
+        <id>enc</id>
+        <value id="ssha">ssha</value>
+        <value id="crypt">crypt</value>
+      </helper>
+      <icon>lock.png</icon>
+      <post>=php.PasswordEncrypt(%enc%;%userPassword%)</post>
+      <spacer>1</spacer>
+      <verify>1</verify>
+    </attribute>
+    <attribute id="loginShell">
+      <display>Login shell</display>
+      <default>/bin/bash</default>
+      <type>select</type>
+      <value id="/bin/bash">Bash</value>
+      <value id="/bin/never">Never</value>
+    </attribute>
+    <attribute id="homeDirectory">
+      <display>Home directory</display>
+      <readonly>1</readonly>
+    </attribute>
+    <attribute id="uidNumber">
+      <display>User id number</display>
+      <readonly>1</readonly>
+      <value>=php.GetNextNumber(/;uidNumber;true;;;10000)</value>
+    </attribute>
+    <attribute id="gidNumber">
+      <display>Group id number</display>
+      <readonly>1</readonly>
+      <value>=php.GetNextNumber(/;uidNumber;true;;;10000)</value>
+    </attribute>
+  </attributes>
+</template>

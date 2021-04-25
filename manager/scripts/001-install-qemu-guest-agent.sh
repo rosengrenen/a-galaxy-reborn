@@ -1,1 +1,1 @@
-sudo apt install qemu-quest-agent -y
+sudo apt install qemu-guest-agent -y

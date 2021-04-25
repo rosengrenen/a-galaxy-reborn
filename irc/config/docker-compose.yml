@@ -1,0 +1,20 @@
+version: "3"
+services:
+  irc:
+    image: cthit/inspircd:3.9.0
+    restart: unless-stopped
+    environment:
+      INSP_SERVICES_NAME: services.irc.chalmers.it
+      INSP_SERVICES_PASSWORD: digit
+    ports:
+      - 6697:6697
+    volumes:
+      - /data/irc/conf:/inspircd/conf
+      - /etc/letsencrypt/live/irc.chalmers.it/fullchain.pem:/inspircd/ssl/cert.pem
+      - /etc/letsencrypt/live/irc.chalmers.it/privkey.pem:/inspircd/ssl/key.pem
+  anope:
+    image: anope/anope:2.0.8
+    environment:
+      ANOPE_SERVICES_NAME: services.irc.chalmers.it
+      ANOPE_UPLINK_IP: irc
+      ANOPE_UPLINK_PASSWORD: digit

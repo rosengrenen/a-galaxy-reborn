@@ -2,6 +2,7 @@ version: "3"
 services:
   ldap:
     image: osixia/openldap
+    restart: unless-stopped
     environment:
       LDAP_ORGANISATION: digIT
       LDAP_DOMAIN: chalmers.it
@@ -22,8 +23,12 @@ services:
 
   gui:
     image: osixia/phpldapadmin
+    restart: unless-stopped
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: ldap
       PHPLDAPADMIN_HTTPS: "false"
     ports:
-      - 80:80
+      - 8080:80
+    volumes:
+      - ./templates:/var/www/phpldapadmin/templates/creation
+      - ./it.png:/var/www/phpldapadmin/htdocs/images/default/it.png

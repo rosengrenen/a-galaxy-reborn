@@ -1,6 +1,6 @@
 version: "3"
 services:
-  web-proxy:
+  proxy:
     image: caddy:2.3.0
     restart: unless-stopped
     ports:

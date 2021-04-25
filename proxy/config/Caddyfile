@@ -20,7 +20,7 @@ http://irc.chalmers.it {
   reverse_proxy /.well-known/* http://irc:80
 }
 
-http://chalmers.it {
+http://ldap.chalmers.it {
   reverse_proxy /.well-known/* http://ldap:80
 }
 
