@@ -4,7 +4,7 @@ Server that hosts an OpenLDAP server.
 
 ## Info about setup
 
-Runs OpenLDAP and phpldapadmin in docker containers.
+Runs OpenLDAP and phpldapadmin in docker containers. It exposes secure ldap on port 636 and unsecure phpldapadmin on port 8080.
 
 ## How to setup
 

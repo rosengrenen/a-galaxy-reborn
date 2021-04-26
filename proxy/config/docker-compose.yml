@@ -4,6 +4,8 @@ services:
     image: cthit/caddy-cloudflare:2.3.0
     restart: unless-stopped
     network_mode: host
+    environment:
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - /data/caddy:/data
