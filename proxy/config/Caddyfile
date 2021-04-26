@@ -25,7 +25,7 @@ http://ldap.chalmers.it {
 }
 
 https://ldap.chalmers.it {
-  reverse_proxy http://ldap:80
+  reverse_proxy http://ldap:8080
 }
 
 https://proxmox.chalmers.it {

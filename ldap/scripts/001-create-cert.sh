@@ -3,6 +3,6 @@ sudo certbot certonly \
   --rsa-key-size=4096 \
   --cert-name=ldap.chalmers.it \
   --domains=ldap.chalmers.it \
-  --nginx \
+  --standalone \
   --agree-tos \
   --no-eff-email
