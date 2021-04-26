@@ -8,6 +8,12 @@ Runs a dockerized [caddy](https://caddyserver.com/) as an ssl terminating proxy 
 
 ## How to setup
 
+### Build docker image
+
+docker buildx build -t cthit/caddy-cloudflare:2.3.0 --push --platform linux/amd64,linux/arm64 .
+
+### Starting proxy
+
 Copy `config` to a good location on the host, such as `~/proxy` or `/opt/proxy`. Folder can be copied with `scp` from your local computer.
 
 In the `proxy` directory copy `.env.example` to `.env` and fill in the values.

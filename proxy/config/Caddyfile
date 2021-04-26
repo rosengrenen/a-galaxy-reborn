@@ -2,7 +2,7 @@
   email serverchef.digit@chalmers.it
 
   # For prod
-  acme_dns cloudflare <cloudflare_api_token>
+  acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
 
   # For dev
   # local_certs
