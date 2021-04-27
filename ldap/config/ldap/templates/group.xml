@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE template SYSTEM "template.dtd">
+<template>
+  <askcontainer>1</askcontainer>
+  <description>New Chalmers IT Group</description>
+  <icon>it.png</icon>
+  <invalid>0</invalid>
+  <rdn>cn</rdn>
+  <regexp>^ou=.*,ou=groups</regexp>
+  <title>Chalmers IT: Group</title>
+  <visible>1</visible>
+
+  <objectClasses>
+    <objectClass id="groupOfNames"></objectClass>
+    <objectClass id="customPosixGroup"></objectClass>
+    <objectClass id="top"></objectClass>
+  </objectClasses>
+
+  <attributes>
+    <attribute id="cn">
+      <display>Group name</display>
+    </attribute>
+    <attribute id="gidNumber">
+      <display>GID Number</display>
+      <hidden>1</hidden>
+      <readonly>1</readonly>
+      <hint>The next available number is automatically selected...</hint>
+      <value>=php.GetNextNumber(/;gidNumber;true;;;5000)</value>
+    </attribute>
+    <attribute id="member">
+      <display>Members</display>
+      <value>
+        <![CDATA[=php.MultiList(/;(&(objectClass=posixAccount));dn;%cn% '%uid%' %sn%)]]>
+      </value>
+    </attribute>
+  </attributes>
+</template>

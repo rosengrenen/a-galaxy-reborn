@@ -1,0 +1,10 @@
+- name: upgrade ubuntu machines
+  hosts: ubuntu
+  remote_user: digit
+  become: yes
+
+  tasks:
+    - name: upgrade packages
+      apt:
+        upgrade: yes
+        update_cache: yes

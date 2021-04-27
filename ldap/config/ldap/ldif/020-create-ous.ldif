@@ -1,0 +1,9 @@
+dn: ou=groups,dc=chalmers,dc=it
+objectclass: organizationalUnit
+objectclass: top
+ou: groups
+
+dn: ou=people,dc=chalmers,dc=it
+objectclass: organizationalUnit
+objectclass: top
+ou: people

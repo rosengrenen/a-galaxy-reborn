@@ -1,5 +1,15 @@
 # a-galaxy-reborn
 
-Collection of installation scripts and configuration files to easily setup the server.
-These things should be updated when configuration changes on the live server, so that
-a reinstallation doesn't become infeasible.
+## How to setup
+
+Install Proxmox VE on bare metal.
+
+Install the following ubuntu server 20.04 LTS virtual machines through the user interface available on port 8006:
+
+- manager
+- kubernetes-1
+- http
+- irc
+- ldap
+- proxy
+- screen

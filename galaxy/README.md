@@ -1,7 +1,7 @@
 # galaxy
 
-## TODO
+The root server, running Proxmox VE.
 
-- nginx tcp/udp port forwarding
-- move tls configuration to own file that can be included
-- nginx tls configuration needs to be expanded beyond only the certs (dhparams etc.)
+## How to setup
+
+Just run the scripts in the `scripts` folder.

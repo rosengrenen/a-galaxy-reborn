@@ -1,0 +1,6 @@
+dn: cn=customposixgroup,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: customposixgroup
+olcObjectClasses: ( 1.3.6.1.1.3.3.3 NAME 'customPosixGroup' DESC 'Abstraction of
+ a group of accounts' SUP top AUXILIARY MUST ( cn $ gidNumber ) MAY ( userPas
+ sword $ memberUid $ description ) )

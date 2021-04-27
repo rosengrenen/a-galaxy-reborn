@@ -1,0 +1,7 @@
+import sites-enabled/*
+
+:80 {
+  file_server {
+    root /var/www/404
+  }
+}

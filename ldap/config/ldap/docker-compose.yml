@@ -1,0 +1,34 @@
+version: "3"
+services:
+  ldap:
+    image: osixia/openldap
+    restart: unless-stopped
+    environment:
+      LDAP_ORGANISATION: digIT
+      LDAP_DOMAIN: chalmers.it
+      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+      LDAP_TLS_CRT_FILENAME: live/ldap.chalmers.it/cert.pem
+      LDAP_TLS_KEY_FILENAME: live/ldap.chalmers.it/privkey.pem
+      LDAP_TLS_CA_CRT_FILENAME: live/ldap.chalmers.it/fullchain.pem
+      LDAP_TLS_VERIFY_CLIENT: try
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "false"
+    hostname: ldap.chalmers.it
+    ports:
+      - 636:636
+    volumes:
+      - /etc/letsencrypt:/container/service/slapd/assets/certs
+      - ./ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom
+      - /data/ldap/database:/var/lib/ldap
+      - /data/ldap/config:/etc/ldap/slapd.d
+
+  gui:
+    image: osixia/phpldapadmin
+    restart: unless-stopped
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - 8080:80
+    volumes:
+      - ./templates:/var/www/phpldapadmin/templates/creation
+      - ./it.png:/var/www/phpldapadmin/htdocs/images/default/it.png

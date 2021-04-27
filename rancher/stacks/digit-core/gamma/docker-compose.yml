@@ -1,0 +1,55 @@
+version: "3"
+services:
+  gamma-backend:
+    image: cthit/gamma-backend:latest
+    environment:
+      SERVER_PORT: 9090
+      LOGGING_FILE: log/production.log
+      JWT_SECRET_KEY: jwt_secret
+      JWT_EXPIRE_LENGTH: 2592000000
+      FRONTEND_CLIENT_ID: client_id
+      FRONTEND_CLIENT_SECRET: client_secret
+      FRONTEND_REDIRECT_URI: https://gamma.chalmers.it/login
+      SUCCESSFUL_LOGIN: https://gamma.chalmers.it
+      ADMIN_PASSWORD: password
+      GOTIFY_KEY: gotify_key
+      GOTIFY_URL: http://10.42.244.213:8080/mail
+      CORS_ALLOWED_ORIGIN: https://gamma.chalmers.it
+      AUTH_ACCESS_TOKEN_VALIDITY: 3600
+      AUTH_AUTO_APPROVE: true
+      AUTH_REFRESH_TOKEN_VALIDITY: 500000000
+      DB_HOST: db
+      DB_NAME: gamma
+      DB_USER: gamma
+      DB_PASSWORD: gamma
+      ROOT_DEBUG_LEVEL: INFO
+      WEB_DEBUG_LEVEL: INFO
+      REDIS_HOST: redis
+      REDIS_PASSWORD:
+      COOKIE_DOMAIN: gamma.chalmers.it
+      BACKEND_URI: https://gamma.chalmers.it/api/
+    volumes:
+      - /data/gamma/images:/app/uploads
+  gamma-frontend:
+    image: cthit/gamma-frontend:latest
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: gamma
+      POSTGRES_PASSWORD: gamma
+      POSTGRES_DB: gamma
+    volumes:
+      - /data/gamma/conf:/etc/postgresql
+      - /data/gamma/log:/var/log/postgresql
+      - /data/gamma/data:/var/lib/postgresql/data
+    labels:
+      bagop.enable: "true"
+      bagop.name: gamma
+      bagop.vendor: postgres
+  redis:
+    image: redis:6.2.1
+  chalmers-ldap:
+    image: gurrit2/ldap-searcher
+    environment:
+      ADDRESS: https://gamma.chalmers.it/api
+      API_KEY: <api_key>
