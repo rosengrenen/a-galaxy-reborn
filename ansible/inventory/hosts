@@ -3,12 +3,9 @@ kubernetes-1 ansible_python_interpreter=/usr/bin/python3
 http ansible_python_interpreter=/usr/bin/python3
 proxy ansible_python_interpreter=/usr/bin/python3
 ldap ansible_python_interpreter=/usr/bin/python3
-irc ansible_python_interpreter=/usr/bin/python3
-screen ansible_python_interpreter=/usr/bin/python3
 
 [docker]
 kubernetes-1 ansible_python_interpreter=/usr/bin/python3
 http ansible_python_interpreter=/usr/bin/python3
 proxy ansible_python_interpreter=/usr/bin/python3
 ldap ansible_python_interpreter=/usr/bin/python3
-irc ansible_python_interpreter=/usr/bin/python3

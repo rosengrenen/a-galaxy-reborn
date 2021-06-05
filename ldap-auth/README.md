@@ -1,4 +1,4 @@
-# screen
+# ldap-auth
 
 A server that hosts screen sessions, mainly used to persist sessions to the irc.
 
@@ -28,20 +28,4 @@ session required        pam_mkhomedir.so skel=/etc/skel/ umask=0022
 
 ```sh
 sudo systemctl enable --now sssd
-```
-
-### screen/tmux/irssi/weechat
-
-1. Install the packages
-
-```sh
-sudo apt install screen tmux irssi weechat
-```
-
-2. Copy `irkk` to `/usr/local/bin/irkk` and `sudo chmod +x /usr/local/bin/irkk`
-
-3. Add the following to `/etc/skel/.bashrc`
-
-```
-irkk
 ```

@@ -40,7 +40,8 @@ https://proxmox.chalmers.it {
 
 https://chalmers.it,
 https://*.chalmers.it,
-https://nollk.it {
+https://nollk.it,
+https://*.dev.chalmers.it {
   reverse_proxy {
     to http://kubernetes-1:80
     header_up X-Real-IP {remote_host}
