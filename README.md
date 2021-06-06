@@ -9,7 +9,5 @@ Install the following ubuntu server 20.04 LTS virtual machines through the user 
 - manager
 - kubernetes-1
 - http
-- irc
 - ldap
 - proxy
-- screen
