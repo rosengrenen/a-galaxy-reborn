@@ -10,14 +10,8 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - /data/caddy:/data
 
-  irc-secure-proxy:
-    image: hpello/tcp-proxy:1.1.0
-    restart: unless-stopped
-    network_mode: host
-    command: irc 6697
-
   ldap-secure-proxy:
     image: hpello/tcp-proxy:1.1.0
     restart: unless-stopped
     network_mode: host
-    command: ldap 636
+    command: dantooine.chalmers.it 636

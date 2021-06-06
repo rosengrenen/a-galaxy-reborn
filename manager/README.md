@@ -48,4 +48,6 @@ Run `rke up` to update the nodes. When complete the kubernetes cluster is fully 
 
 ### Installing rancher
 
+`export KUBECONFIG=<rke folder path>/kube_config_cluster.yml`
+
 To install rancher run the `011-install-rancher.sh` script.

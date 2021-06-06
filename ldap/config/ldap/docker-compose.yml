@@ -7,12 +7,12 @@ services:
       LDAP_ORGANISATION: digIT
       LDAP_DOMAIN: chalmers.it
       LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
-      LDAP_TLS_CRT_FILENAME: live/ldap.chalmers.it/cert.pem
-      LDAP_TLS_KEY_FILENAME: live/ldap.chalmers.it/privkey.pem
-      LDAP_TLS_CA_CRT_FILENAME: live/ldap.chalmers.it/fullchain.pem
+      LDAP_TLS_CRT_FILENAME: live/dantooine.chalmers.it/cert.pem
+      LDAP_TLS_KEY_FILENAME: live/dantooine.chalmers.it/privkey.pem
+      LDAP_TLS_CA_CRT_FILENAME: live/dantooine.chalmers.it/fullchain.pem
       LDAP_TLS_VERIFY_CLIENT: try
       LDAP_REMOVE_CONFIG_AFTER_SETUP: "false"
-    hostname: ldap.chalmers.it
+    hostname: dantooine.chalmers.it
     ports:
       - 636:636
     volumes:

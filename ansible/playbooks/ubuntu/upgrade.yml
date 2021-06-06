@@ -1,6 +1,6 @@
 - name: upgrade ubuntu machines
   hosts: ubuntu
-  remote_user: digit
+  remote_user: digit-local
   become: yes
 
   tasks:

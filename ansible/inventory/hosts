@@ -1,11 +1,11 @@
 [ubuntu]
-kubernetes-1 ansible_python_interpreter=/usr/bin/python3
-http ansible_python_interpreter=/usr/bin/python3
-proxy ansible_python_interpreter=/usr/bin/python3
-ldap ansible_python_interpreter=/usr/bin/python3
+starswarm.chalmers.it ansible_python_interpreter=/usr/bin/python3
+yavin.chalmers.it ansible_python_interpreter=/usr/bin/python3
+bespin.chalmers.it ansible_python_interpreter=/usr/bin/python3
+dantooine.chalmers.it ansible_python_interpreter=/usr/bin/python3
 
 [docker]
-kubernetes-1 ansible_python_interpreter=/usr/bin/python3
-http ansible_python_interpreter=/usr/bin/python3
-proxy ansible_python_interpreter=/usr/bin/python3
-ldap ansible_python_interpreter=/usr/bin/python3
+starswarm.chalmers.it ansible_python_interpreter=/usr/bin/python3
+yavin.chalmers.it ansible_python_interpreter=/usr/bin/python3
+bespin.chalmers.it ansible_python_interpreter=/usr/bin/python3
+dantooine.chalmers.it ansible_python_interpreter=/usr/bin/python3
