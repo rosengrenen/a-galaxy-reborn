@@ -1,7 +1,7 @@
 version: "3"
 services:
   bitwarden:
-    image: bitwardenrs/server:1.20.0
+    image: vaultwarden/server:1.21.0
     restart: unless-stopped
     environment:
       DOMAIN: https://bitwarden.chalmers.it
