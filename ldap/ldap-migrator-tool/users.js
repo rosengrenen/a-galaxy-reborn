@@ -12,12 +12,13 @@ users.forEach((user) => {
 });
 
 let newUsers = [];
+let currentIdOffset = 0;
 
 users.forEach((user) => {
 	newUsers.push({
 		dn: user.dn[0],
 		cn: user.givenname[0],
-		gidnumber: 3000 + newUsers.length,
+		gidnumber: 10000 + currentIdOffset,
 		homedirectory: "/home/chalmersit/" + user.uid[0],
 		loginshell: "/bin/bash",
 		objectclass: [
@@ -28,12 +29,14 @@ users.forEach((user) => {
 		],
 		userpassword: user.userpassword[0],
 		sn: user.sn[0],
-		uidnumber: 3000 + newUsers.length,
+		uidnumber: 10000 + currentIdOffset,
 		uid: user.uid[0],
 		...(user.sshpublickey !== undefined
 			? { sshpublickey: user.sshpublickey[0] }
 			: {}),
 	});
+
+	currentIdOffset++;
 });
 
 print(newUsers, "new-users.ldif");

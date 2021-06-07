@@ -3,4 +3,4 @@ services:
   proxy:
     image: hpello/tcp-proxy:1.1.0
     restart: unless-stopped
-    command: yavin.digit-local 80
+    command: yavin.digit-net 80

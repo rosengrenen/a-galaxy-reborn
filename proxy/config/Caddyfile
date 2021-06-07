@@ -18,21 +18,21 @@
   redir @http https://{host}{url} permanent
 }
 
-http://ldap.chalmers.it {
-  reverse_proxy /.well-known/* http://dantooine.digit-local:80
+http://dantooine.chalmers.it/.well-known/* {
+  reverse_proxy /.well-known/* http://dantooine.digit-net:80
 }
 
-https://ldap.chalmers.it {
+https://dantooine.chalmers.it {
   import cloudflare-tls
 
-  reverse_proxy http://dantooine.digit-local:8080
+  reverse_proxy http://dantooine.digit-net:8080
 }
 
 https://proxmox.chalmers.it {
   import cloudflare-tls
 
   reverse_proxy {
-    to https://galaxy.digit-local:8006
+    to https://galaxy.digit-net:8006
     header_up X-Real-IP {remote_host}
     transport http {
       tls_insecure_skip_verify
@@ -46,14 +46,14 @@ https://*.dev.chalmers.it {
   import cloudflare-tls
 
   reverse_proxy {
-    to http://starswarm.digit-local:80
+    to http://starswarm.digit-net:80
     header_up X-Real-IP {remote_host}
   }
 }
 
 https://nollk.it {
   reverse_proxy {
-    to http://starswarm.digit-local:80
+    to http://starswarm.digit-net:80
     header_up X-Real-IP {remote_host}
   }
 }

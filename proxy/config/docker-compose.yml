@@ -14,4 +14,4 @@ services:
     image: hpello/tcp-proxy:1.1.0
     restart: unless-stopped
     network_mode: host
-    command: dantooine.digit-local 636
+    command: dantooine.digit-net 636
