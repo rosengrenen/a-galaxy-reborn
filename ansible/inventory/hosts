@@ -1,11 +1,11 @@
 [ubuntu]
-starswarm.chalmers.it ansible_python_interpreter=/usr/bin/python3
-yavin.chalmers.it ansible_python_interpreter=/usr/bin/python3
-bespin.chalmers.it ansible_python_interpreter=/usr/bin/python3
-dantooine.chalmers.it ansible_python_interpreter=/usr/bin/python3
+starswarm.digit-local ansible_python_interpreter=/usr/bin/python3
+yavin.digit-local ansible_python_interpreter=/usr/bin/python3
+bespin.digit-local ansible_python_interpreter=/usr/bin/python3
+dantooine.digit-local ansible_python_interpreter=/usr/bin/python3
 
 [docker]
-starswarm.chalmers.it ansible_python_interpreter=/usr/bin/python3
-yavin.chalmers.it ansible_python_interpreter=/usr/bin/python3
-bespin.chalmers.it ansible_python_interpreter=/usr/bin/python3
-dantooine.chalmers.it ansible_python_interpreter=/usr/bin/python3
+starswarm.digit-local ansible_python_interpreter=/usr/bin/python3
+yavin.digit-local ansible_python_interpreter=/usr/bin/python3
+bespin.digit-local ansible_python_interpreter=/usr/bin/python3
+dantooine.digit-local ansible_python_interpreter=/usr/bin/python3

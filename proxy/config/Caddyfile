@@ -1,11 +1,13 @@
 {
   email serverchef.digit@chalmers.it
+}
 
-  # For prod
-  acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
-
-  # For dev
-  # local_certs
+(cloudflare-tls) {
+  tls {
+    issuer acme {
+      dns cloudflare {$CLOUDFLARE_API_TOKEN}
+    }
+  }
 }
 
 :80 {
@@ -17,16 +19,20 @@
 }
 
 http://ldap.chalmers.it {
-  reverse_proxy /.well-known/* http://dantooine.chalmers.it:80
+  reverse_proxy /.well-known/* http://dantooine.digit-local:80
 }
 
 https://ldap.chalmers.it {
-  reverse_proxy http://dantooine.chalmers.it:8080
+  import cloudflare-tls
+
+  reverse_proxy http://dantooine.digit-local:8080
 }
 
 https://proxmox.chalmers.it {
+  import cloudflare-tls
+
   reverse_proxy {
-    to https://galaxy.chalmers.it:8006
+    to https://galaxy.digit-local:8006
     header_up X-Real-IP {remote_host}
     transport http {
       tls_insecure_skip_verify
@@ -37,18 +43,17 @@ https://proxmox.chalmers.it {
 https://chalmers.it,
 https://*.chalmers.it,
 https://*.dev.chalmers.it {
+  import cloudflare-tls
+
   reverse_proxy {
-    to http://starswarm.chalmers.it:80
+    to http://starswarm.digit-local:80
     header_up X-Real-IP {remote_host}
   }
 }
 
 https://nollk.it {
   reverse_proxy {
-    to http://starswarm.chalmers.it:80
+    to http://starswarm.digit-local:80
     header_up X-Real-IP {remote_host}
-    transport http {
-      issuer acme
-    }
   }
 }
