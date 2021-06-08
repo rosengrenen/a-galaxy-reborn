@@ -48,6 +48,7 @@ https://*.dev.chalmers.it {
   reverse_proxy {
     to http://starswarm.digit-net:80
     header_up X-Real-IP {remote_host}
+    header_up X-Forwarded-Port 443
   }
 }
 
@@ -55,5 +56,6 @@ https://nollk.it {
   reverse_proxy {
     to http://starswarm.digit-net:80
     header_up X-Real-IP {remote_host}
+    header_up X-Forwarded-Port 443
   }
 }

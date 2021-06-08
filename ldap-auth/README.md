@@ -29,3 +29,10 @@ session required        pam_mkhomedir.so skel=/etc/skel/ umask=0022
 ```sh
 sudo systemctl enable --now sssd
 ```
+
+6. Enable authenticating with pubkey change the following in `/etc/ssh/sshd_config`
+
+```conf
+AuthorizedKeysCommand /usr/bin/sss_ssh_authorizedkeys
+AuthorizedKeysCommandUser root
+```
