@@ -24,15 +24,16 @@ sudo apt install sssd libpam-sss libnss-sss
 session required        pam_mkhomedir.so skel=/etc/skel/ umask=0022
 ```
 
-5. Start and enable `sssd`
-
-```sh
-sudo systemctl enable --now sssd
-```
-
-6. Enable authenticating with pubkey change the following in `/etc/ssh/sshd_config`
+5. Enable authenticating with pubkey change the following in `/etc/ssh/sshd_config`
 
 ```conf
 AuthorizedKeysCommand /usr/bin/sss_ssh_authorizedkeys
 AuthorizedKeysCommandUser root
+```
+
+6. Start and enable `sssd`
+
+```sh
+sudo systemctl enable --now sssd
+sudo systemctl restart sshd
 ```
