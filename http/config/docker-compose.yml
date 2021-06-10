@@ -7,6 +7,7 @@ services:
       - 80:80
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./sites-available:/etc/caddy/sites-available
       - ./sites-enabled:/etc/caddy/sites-enabled
       - /data/caddy:/data
       - /var/www:/var/www
